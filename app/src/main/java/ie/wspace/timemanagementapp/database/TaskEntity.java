@@ -6,26 +6,26 @@ import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "notes")
+@Entity(tableName = "tasks")
 
-public class NoteEntity {
+public class TaskEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private Date date;
     private String text;
 
     @Ignore
-    public NoteEntity() {
+    public TaskEntity() {
     }
 
-    public NoteEntity(int id, Date date, String text) {
+    public TaskEntity(int id, Date date, String text) {
         this.id = id;
         this.date = date;
         this.text = text;
     }
 
     @Ignore
-    public NoteEntity(Date date, String text) {
+    public TaskEntity(Date date, String text) {
         this.date = date;
         this.text = text;
     }
@@ -56,7 +56,7 @@ public class NoteEntity {
 
     @Override
     public String toString() {
-        return "NoteEntity{" +
+        return "TaskEntity{" +
                 "id=" + id +
                 ", date=" + date +
                 ", text='" + text + '\'' +

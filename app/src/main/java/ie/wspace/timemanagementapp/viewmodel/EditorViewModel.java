@@ -12,11 +12,11 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import ie.wspace.timemanagementapp.database.AppRepository;
-import ie.wspace.timemanagementapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.database.TaskEntity;
 
 public class EditorViewModel extends AndroidViewModel {
 
-    public MutableLiveData<NoteEntity> mLiveNote = new MutableLiveData<>();
+    public MutableLiveData<TaskEntity> mLiveTask = new MutableLiveData<>();
     private AppRepository mRepository;
     private Executor executor = Executors.newSingleThreadExecutor();
 
@@ -25,31 +25,31 @@ public class EditorViewModel extends AndroidViewModel {
         mRepository = AppRepository.getInstance(getApplication());
     }
 
-    public void loadData(final int noteId) {
+    public void loadData(final int taskId) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                NoteEntity note = mRepository.getNoteById(noteId);
-                mLiveNote.postValue(note);
+                TaskEntity task = mRepository.getTaskById(taskId);
+                mLiveTask.postValue(task);
             }
         });
     }
 
-    public void saveNote(String noteText) {
-        NoteEntity note = mLiveNote.getValue();
+    public void saveTask(String taskText) {
+        TaskEntity task = mLiveTask.getValue();
 
-        if(note == null) {
-            if(TextUtils.isEmpty(noteText.trim())) {
+        if(task == null) {
+            if(TextUtils.isEmpty(taskText.trim())) {
                 return;
             }
-            note = new NoteEntity(new Date(), noteText.trim());
+            task = new TaskEntity(new Date(), taskText.trim());
         } else {
-            note.setText(noteText.trim());
+            task.setText(taskText.trim());
         }
-        mRepository.insertNote(note);
+        mRepository.insertTask(task);
     }
 
-    public void deleteNote() {
-        mRepository.deleteNote(mLiveNote.getValue());
+    public void deleteTask() {
+        mRepository.deleteTask(mLiveTask.getValue());
     }
 }

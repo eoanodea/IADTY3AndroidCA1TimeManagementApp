@@ -21,8 +21,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ie.wspace.timemanagementapp.database.NoteEntity;
-import ie.wspace.timemanagementapp.ui.NotesAdapter;
+import ie.wspace.timemanagementapp.database.TaskEntity;
+import ie.wspace.timemanagementapp.ui.TasksAdapter;
 import ie.wspace.timemanagementapp.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-    private List<NoteEntity> notesData = new ArrayList<>();
-    private NotesAdapter mAdapter;
+    private List<TaskEntity> tasksData = new ArrayList<>();
+    private TasksAdapter mAdapter;
     private MainViewModel mViewModel;
 
     @Override
@@ -61,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        final Observer<List<NoteEntity>> notesObserver = new Observer<List<NoteEntity>>() {
+        final Observer<List<TaskEntity>> tasksObserver = new Observer<List<TaskEntity>>() {
             @Override
-            public void onChanged(List<NoteEntity> noteEntities) {
-                notesData.clear();
-                notesData.addAll(noteEntities);
+            public void onChanged(List<TaskEntity> taskEntities) {
+                tasksData.clear();
+                tasksData.addAll(taskEntities);
 
                 if (mAdapter == null) {
-                    mAdapter = new NotesAdapter(notesData, MainActivity.this);
+                    mAdapter = new TasksAdapter(tasksData, MainActivity.this);
                     mRecyclerView.setAdapter(mAdapter);
                 } else {
                     mAdapter.notifyDataSetChanged();
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         mViewModel = ViewModelProviders.of(this)
             .get(MainViewModel.class);
-        mViewModel.mNotes.observe(this, notesObserver);
+        mViewModel.mTasks.observe(this, tasksObserver);
     }
 
     private void initRecyclerView() {
@@ -106,15 +106,15 @@ public class MainActivity extends AppCompatActivity {
             addSampleData();
             return true;
         } else if (id == R.id.action_delete_all) {
-            deleteAllNotes();
+            deleteAllTasks();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void deleteAllNotes() {
-        mViewModel.deleteAllNotes();
+    private void deleteAllTasks() {
+        mViewModel.deleteAllTasks();
     }
 
     private void addSampleData() {

@@ -18,17 +18,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ie.wspace.timemanagementapp.EditorActivity;
 import ie.wspace.timemanagementapp.R;
-import ie.wspace.timemanagementapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.database.TaskEntity;
 
 import static ie.wspace.timemanagementapp.utilities.Constants.NOTE_ID_KEY;
 
-public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
+public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> {
 
-    private final List<NoteEntity> mNotes;
+    private final List<TaskEntity> mTasks;
     private final Context mContext;
 
-    public NotesAdapter(List<NoteEntity> mNotes, Context mContext) {
-        this.mNotes = mNotes;
+    public TasksAdapter(List<TaskEntity> mTasks, Context mContext) {
+        this.mTasks = mTasks;
         this.mContext = mContext;
     }
 
@@ -36,20 +36,20 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.note_list_item, parent, false);
+        View view = inflater.inflate(R.layout.task_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final NoteEntity note = mNotes.get(position);
-        holder.mTextView.setText(note.getText());
+        final TaskEntity task = mTasks.get(position);
+        holder.mTextView.setText(task.getText());
 
         holder.mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, EditorActivity.class);
-                intent.putExtra(NOTE_ID_KEY, note.getId());
+                intent.putExtra(NOTE_ID_KEY, task.getId());
                 mContext.startActivity(intent);
             }
         });
@@ -57,11 +57,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mNotes.size();
+        return mTasks.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.note_text)
+        @BindView(R.id.task_text)
         TextView mTextView;
         @BindView(R.id.fab)
         FloatingActionButton mFab;

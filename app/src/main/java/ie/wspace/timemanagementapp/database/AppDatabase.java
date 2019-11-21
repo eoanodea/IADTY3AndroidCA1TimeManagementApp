@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {NoteEntity.class}, version = 1)
+@Database(entities = {TaskEntity.class}, version = 1)
 @TypeConverters(DateConverter.class)
 
 public abstract class AppDatabase extends RoomDatabase {
@@ -15,7 +15,7 @@ public abstract class AppDatabase extends RoomDatabase {
     private static volatile AppDatabase instance;
     private static final Object LOCK = new Object();
 
-    public abstract NoteDao noteDao();
+    public abstract TaskDao taskDao();
 
     public static AppDatabase getInstance(Context context) {
         if(instance == null) {

@@ -9,25 +9,25 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import ie.wspace.timemanagementapp.database.AppRepository;
-import ie.wspace.timemanagementapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.database.TaskEntity;
 
 public class MainViewModel extends AndroidViewModel {
 
-    public LiveData<List<NoteEntity>> mNotes;
+    public LiveData<List<TaskEntity>> mTasks;
     private AppRepository mRepository;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
 
         mRepository = AppRepository.getInstance(application.getApplicationContext());
-        mNotes = mRepository.mNotes;
+        mTasks = mRepository.mTasks;
     }
 
     public void addSampleData() {
         mRepository.addSampleData();
     }
 
-    public void deleteAllNotes() {
-        mRepository.deleteAllNotes();
+    public void deleteAllTasks() {
+        mRepository.deleteAllTasks();
     }
 }

@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ie.wspace.timemanagementapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.database.TaskEntity;
 import ie.wspace.timemanagementapp.utilities.Constants;
 import ie.wspace.timemanagementapp.viewmodel.EditorViewModel;
 
@@ -23,11 +23,11 @@ import static ie.wspace.timemanagementapp.utilities.Constants.NOTE_ID_KEY;
 
 public class EditorActivity extends AppCompatActivity {
 
-    @BindView(R.id.note_text)
+    @BindView(R.id.task_text)
     TextView mTextView;
 
     private EditorViewModel mViewModel;
-    private boolean mNewNote, mEditing;
+    private boolean mNewTask, mEditing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,29 +51,29 @@ public class EditorActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this)
                 .get(EditorViewModel.class);
 
-        mViewModel.mLiveNote.observe(this, new Observer<NoteEntity>() {
+        mViewModel.mLiveTask.observe(this, new Observer<TaskEntity>() {
             @Override
-            public void onChanged(NoteEntity noteEntity) {
-                if(noteEntity != null && !mEditing) {
-                    mTextView.setText(noteEntity.getText());
+            public void onChanged(TaskEntity taskEntity) {
+                if(taskEntity != null && !mEditing) {
+                    mTextView.setText(taskEntity.getText());
                 }
             }
         });
 
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
-            setTitle(R.string.new_note);
-            mNewNote = true;
+            setTitle(R.string.new_task);
+            mNewTask = true;
         } else {
-            setTitle(R.string.edit_note);
-            int noteId = extras.getInt(NOTE_ID_KEY);
-            mViewModel.loadData(noteId);
+            setTitle(R.string.edit_task);
+            int taskId = extras.getInt(NOTE_ID_KEY);
+            mViewModel.loadData(taskId);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
-        if(!mNewNote) {
+        if(!mNewTask) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_editor, menu);
         }
@@ -86,7 +86,7 @@ public class EditorActivity extends AppCompatActivity {
             saveAndReturn();
             return true;
         } else if (item.getItemId() == R.id.action_delete) {
-            mViewModel.deleteNote();
+            mViewModel.deleteTask();
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -98,7 +98,7 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveNote(mTextView.getText().toString());
+        mViewModel.saveTask(mTextView.getText().toString());
         finish();
     }
 

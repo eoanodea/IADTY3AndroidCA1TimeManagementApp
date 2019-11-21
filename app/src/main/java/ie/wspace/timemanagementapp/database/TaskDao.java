@@ -11,27 +11,27 @@ import java.util.List;
 
 @Dao
 
-public interface NoteDao {
+public interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertNote(NoteEntity noteEntity);
+    void insertTask(TaskEntity taskEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<NoteEntity> notes);
+    void insertAll(List<TaskEntity> tasks);
 
     @Delete
-    void deleteNote(NoteEntity noteEntity);
+    void deleteTask(TaskEntity taskEntity);
 
-    @Query("SELECT * FROM notes WHERE id = :id")
-    NoteEntity getNoteById(int id);
+    @Query("SELECT * FROM tasks WHERE id = :id")
+    TaskEntity getTaskById(int id);
 
-    @Query("SELECT * FROM notes ORDER BY date DESC")
-    LiveData<List<NoteEntity>> getAll();
+    @Query("SELECT * FROM tasks ORDER BY date DESC")
+    LiveData<List<TaskEntity>> getAll();
 
-    @Query("DELETE FROM notes")
+    @Query("DELETE FROM tasks")
     int deleteAll();
 
-    @Query("SELECT COUNT(*) FROM notes")
+    @Query("SELECT COUNT(*) FROM tasks")
     int getCount();
 
 }

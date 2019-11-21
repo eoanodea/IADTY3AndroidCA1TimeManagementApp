@@ -13,7 +13,7 @@ import ie.wspace.timemanagementapp.utilities.SampleData;
 public class AppRepository {
     private static AppRepository ourInstance;
 
-    public LiveData<List<NoteEntity>> mNotes;
+    public LiveData<List<TaskEntity>> mTasks;
     private AppDatabase mDb;
     private Executor executor = Executors.newSingleThreadExecutor();
 
@@ -26,49 +26,49 @@ public class AppRepository {
 
     private AppRepository(Context context) {
         mDb = AppDatabase.getInstance(context);
-        mNotes = getAllNotes();
+        mTasks = getAllTasks();
     }
 
     public void addSampleData() {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mDb.noteDao().insertAll(SampleData.getNotes());
+                mDb.taskDao().insertAll(SampleData.getTasks());
             }
         });
     }
 
-    private LiveData<List<NoteEntity>> getAllNotes() {
-        return mDb.noteDao().getAll();
+    private LiveData<List<TaskEntity>> getAllTasks() {
+        return mDb.taskDao().getAll();
     }
 
-    public void deleteAllNotes() {
+    public void deleteAllTasks() {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mDb.noteDao().deleteAll();
+                mDb.taskDao().deleteAll();
             }
         });
     }
 
-    public NoteEntity getNoteById(int noteId) {
-        return mDb.noteDao().getNoteById(noteId);
+    public TaskEntity getTaskById(int taskId) {
+        return mDb.taskDao().getTaskById(taskId);
     }
 
-    public void insertNote(final NoteEntity note) {
+    public void insertTask(final TaskEntity task) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mDb.noteDao().insertNote(note);
+                mDb.taskDao().insertTask(task);
             }
         });
     }
 
-    public void deleteNote(final NoteEntity note) {
+    public void deleteTask(final TaskEntity task) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                mDb.noteDao().deleteNote(note);
+                mDb.taskDao().deleteTask(task);
             }
         });
     }
