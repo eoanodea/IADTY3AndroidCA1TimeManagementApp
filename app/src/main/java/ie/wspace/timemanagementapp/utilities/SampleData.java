@@ -1,4 +1,4 @@
-package ie.wspace.lab4notesapp.utilities;
+package ie.wspace.timemanagementapp.utilities;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import ie.wspace.lab4notesapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.database.NoteEntity;
 
 public class SampleData {
     private static final String SAMPLE_TEXT_1 = "A simple note";

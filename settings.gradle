@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='Lab4NotesApp'
+rootProject.name='TimeManagementApp'

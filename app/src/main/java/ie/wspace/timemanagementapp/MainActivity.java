@@ -1,4 +1,4 @@
-package ie.wspace.lab4notesapp;
+package ie.wspace.timemanagementapp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,9 +21,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ie.wspace.lab4notesapp.database.NoteEntity;
-import ie.wspace.lab4notesapp.ui.NotesAdapter;
-import ie.wspace.lab4notesapp.viewmodel.MainViewModel;
+import ie.wspace.timemanagementapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.ui.NotesAdapter;
+import ie.wspace.timemanagementapp.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

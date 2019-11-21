@@ -1,4 +1,4 @@
-package ie.wspace.lab4notesapp.database;
+package ie.wspace.timemanagementapp.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

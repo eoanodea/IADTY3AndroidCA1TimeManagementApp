@@ -1,4 +1,4 @@
-package ie.wspace.lab4notesapp.utilities;
+package ie.wspace.timemanagementapp.utilities;
 
 public class Constants {
     public static final String NOTE_ID_KEY = "note_id_key";

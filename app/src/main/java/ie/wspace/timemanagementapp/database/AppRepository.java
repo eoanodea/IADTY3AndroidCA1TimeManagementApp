@@ -1,4 +1,4 @@
-package ie.wspace.lab4notesapp.database;
+package ie.wspace.timemanagementapp.database;
 
 import android.content.Context;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import ie.wspace.lab4notesapp.utilities.SampleData;
+import ie.wspace.timemanagementapp.utilities.SampleData;
 
 public class AppRepository {
     private static AppRepository ourInstance;

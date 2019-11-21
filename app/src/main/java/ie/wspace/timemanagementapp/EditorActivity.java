@@ -1,9 +1,6 @@
-package ie.wspace.lab4notesapp;
+package ie.wspace.timemanagementapp;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,17 +10,16 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ie.wspace.lab4notesapp.database.NoteEntity;
-import ie.wspace.lab4notesapp.utilities.Constants;
-import ie.wspace.lab4notesapp.viewmodel.EditorViewModel;
+import ie.wspace.timemanagementapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.utilities.Constants;
+import ie.wspace.timemanagementapp.viewmodel.EditorViewModel;
 
-import static ie.wspace.lab4notesapp.utilities.Constants.EDITING_KEY;
-import static ie.wspace.lab4notesapp.utilities.Constants.NOTE_ID_KEY;
+import static ie.wspace.timemanagementapp.utilities.Constants.EDITING_KEY;
+import static ie.wspace.timemanagementapp.utilities.Constants.NOTE_ID_KEY;
 
 public class EditorActivity extends AppCompatActivity {
 

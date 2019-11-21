@@ -1,4 +1,4 @@
-package ie.wspace.lab4notesapp.viewmodel;
+package ie.wspace.timemanagementapp.viewmodel;
 
 import android.app.Application;
 import android.text.TextUtils;
@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import ie.wspace.lab4notesapp.database.AppRepository;
-import ie.wspace.lab4notesapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.database.AppRepository;
+import ie.wspace.timemanagementapp.database.NoteEntity;
 
 public class EditorViewModel extends AndroidViewModel {
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab4NotesApp</string>
+    <string name="app_name">TimeManagement App</string>
     <string name="action_add_sample_data">Add Sample Data</string>
     <string name="title_activity_editor">EditorActivity</string>
     <string name="large_text">

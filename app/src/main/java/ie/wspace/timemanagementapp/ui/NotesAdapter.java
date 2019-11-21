@@ -1,4 +1,4 @@
-package ie.wspace.lab4notesapp.ui;
+package ie.wspace.timemanagementapp.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,11 +16,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ie.wspace.lab4notesapp.EditorActivity;
-import ie.wspace.lab4notesapp.R;
-import ie.wspace.lab4notesapp.database.NoteEntity;
+import ie.wspace.timemanagementapp.EditorActivity;
+import ie.wspace.timemanagementapp.R;
+import ie.wspace.timemanagementapp.database.NoteEntity;
 
-import static ie.wspace.lab4notesapp.utilities.Constants.NOTE_ID_KEY;
+import static ie.wspace.timemanagementapp.utilities.Constants.NOTE_ID_KEY;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> {
 
