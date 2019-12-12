@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -44,6 +45,9 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TaskEntity task = mTasks.get(position);
         holder.mTextView.setText(task.getText());
+        if (holder.mTimeView != null) {
+            holder.mTimeView.setText(Double.toString(task.getTime()));
+        }
 
         holder.mFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +67,9 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.task_text)
         TextView mTextView;
+        @Nullable
+        @BindView(R.id.task_time)
+        TextView mTimeView;
         @BindView(R.id.fab)
         FloatingActionButton mFab;
 

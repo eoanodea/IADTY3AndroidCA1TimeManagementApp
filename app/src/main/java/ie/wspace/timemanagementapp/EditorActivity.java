@@ -2,6 +2,7 @@ package ie.wspace.timemanagementapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -12,8 +13,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Optional;
 import ie.wspace.timemanagementapp.database.TaskEntity;
 import ie.wspace.timemanagementapp.utilities.Constants;
 import ie.wspace.timemanagementapp.viewmodel.EditorViewModel;
@@ -25,6 +29,11 @@ public class EditorActivity extends AppCompatActivity {
 
     @BindView(R.id.task_text)
     TextView mTextView;
+
+    @Nullable
+    @BindView(R.id.task_time)
+    TextView mTimeView;
+    //int
 
     private EditorViewModel mViewModel;
     private boolean mNewTask, mEditing;
@@ -56,6 +65,9 @@ public class EditorActivity extends AppCompatActivity {
             public void onChanged(TaskEntity taskEntity) {
                 if(taskEntity != null && !mEditing) {
                     mTextView.setText(taskEntity.getText());
+                    if (mTimeView != null) {
+                        mTimeView.setText(Double.toString(taskEntity.getTime()));
+                    }
                 }
             }
         });
@@ -82,6 +94,8 @@ public class EditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+
         if(item.getItemId() == android.R.id.home) {
             saveAndReturn();
             return true;
@@ -98,7 +112,9 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTask(mTextView.getText().toString());
+        // pass in 2nd param
+        mViewModel.saveTask(mTextView.getText().toString(), Double.parseDouble(mTimeView.getText().toString()));
+      //  mViewModel.saveTask(Integer.parseInt(mTextView.getText().toString()));
         finish();
     }
 

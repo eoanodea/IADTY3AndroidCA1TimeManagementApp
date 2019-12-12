@@ -8,16 +8,32 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".EditorActivity"
     tools:showIn="@layout/activity_editor">
-
-    <EditText
-        android:id="@+id/task_text"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/text_margin"
-        android:autofillHints="Add Notes to your task"
-        android:hint="@string/enter_task"
-        android:inputType="textMultiLine|textCapSentences"
-        android:textColor="@color/primaryTextColor"
-        android:textColorHint="@color/primaryTextColor" />
+        >
+
+        <EditText
+            android:id="@+id/task_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/text_margin"
+            android:autofillHints="Add time to your task"
+            android:hint="@string/enter_task_time"
+            android:inputType="numberDecimal"
+            android:textColor="@color/primaryTextColor"
+            android:textColorHint="@color/primaryTextColor" />
+        <EditText
+            android:id="@+id/task_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/text_margin"
+            android:autofillHints="Add Notes to your task"
+            android:hint="@string/enter_task"
+            android:inputType="textMultiLine|textCapSentences"
+            android:textColor="@color/primaryTextColor"
+            android:textColorHint="@color/primaryTextColor" />
+    </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

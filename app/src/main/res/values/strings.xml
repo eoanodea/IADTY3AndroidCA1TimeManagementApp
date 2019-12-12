@@ -96,4 +96,5 @@
     <string name="new_task">New task</string>
     <string name="edit_task">Edit task</string>
     <string name="delete">Delete</string>
+    <string name="enter_task_time">Enter task time</string>
 </resources>

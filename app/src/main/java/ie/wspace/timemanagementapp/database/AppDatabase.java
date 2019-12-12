@@ -7,11 +7,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {TaskEntity.class}, version = 1)
+@Database(entities = {TaskEntity.class}, version = 2)
 @TypeConverters(DateConverter.class)
 
 public abstract class AppDatabase extends RoomDatabase {
-    public static final String DATABASE_NAME = "AppDatabase.db";
+    public static final String DATABASE_NAME = "AppDatabase1.db";
     private static volatile AppDatabase instance;
     private static final Object LOCK = new Object();
 

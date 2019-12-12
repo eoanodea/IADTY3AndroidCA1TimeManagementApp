@@ -13,21 +13,24 @@ public class TaskEntity {
     private int id;
     private Date date;
     private String text;
+    private Double time;
 
     @Ignore
     public TaskEntity() {
     }
 
-    public TaskEntity(int id, Date date, String text) {
+    public TaskEntity(int id, Date date, String text, Double time) {
         this.id = id;
         this.date = date;
         this.text = text;
+        this.time = time;
     }
 
     @Ignore
-    public TaskEntity(Date date, String text) {
+    public TaskEntity(Date date, String text, Double time) {
         this.date = date;
         this.text = text;
+        this.time = time;
     }
 
     public int getId() {
@@ -54,12 +57,17 @@ public class TaskEntity {
         this.text = text;
     }
 
+    public Double getTime() { return time; }
+
+    public void setTime(Double time) { this.time = time; }
+
     @Override
     public String toString() {
         return "TaskEntity{" +
                 "id=" + id +
                 ", date=" + date +
-                ", text='" + text + '\'' +
+                ", text='" + text +
+                ", time=" + time + '\'' +
                 '}';
     }
 }

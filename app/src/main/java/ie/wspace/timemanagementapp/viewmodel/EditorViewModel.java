@@ -35,16 +35,19 @@ public class EditorViewModel extends AndroidViewModel {
         });
     }
 
-    public void saveTask(String taskText) {
+    //int in here
+    public void saveTask(String taskText, Double taskTime) {
         TaskEntity task = mLiveTask.getValue();
 
         if(task == null) {
             if(TextUtils.isEmpty(taskText.trim())) {
                 return;
             }
-            task = new TaskEntity(new Date(), taskText.trim());
+            // pass in time & alter TaskEntity
+            task = new TaskEntity(new Date(), taskText.trim(), taskTime);
         } else {
             task.setText(taskText.trim());
+            task.setTime(taskTime);
         }
         mRepository.insertTask(task);
     }
