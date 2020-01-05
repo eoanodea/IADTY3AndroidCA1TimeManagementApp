@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -112,9 +114,15 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        // pass in 2nd param
-        mViewModel.saveTask(mTextView.getText().toString(), Double.parseDouble(mTimeView.getText().toString()));
-      //  mViewModel.saveTask(Integer.parseInt(mTextView.getText().toString()));
+        //Get task text and task time
+        String textViewData = mTextView.getText().toString();
+        String timeViewData = mTimeView.getText().toString();
+
+        //Check if task time and text are not empty, and if so save
+        if(!TextUtils.isEmpty(textViewData) && !TextUtils.isEmpty(timeViewData)) {
+            mViewModel.saveTask(textViewData, Double.parseDouble(timeViewData));
+        }
+
         finish();
     }
 
