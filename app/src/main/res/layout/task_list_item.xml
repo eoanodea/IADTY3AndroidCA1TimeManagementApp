@@ -10,27 +10,46 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/list_fab_margin"
         app:backgroundTint="@color/primaryColor"
         app:fabSize="mini"
-        android:layout_margin="@dimen/list_fab_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_edit" />
 
-    <TextView
-        android:id="@+id/task_text"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_margin="8dp"
-        android:maxLines="2"
-        android:ellipsize="end"
-        android:textSize="@dimen/list_text_size"
-        android:textColor="@color/primaryTextColor"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fab"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/task_time"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="TextView"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/list_text_size" />
+
+        <TextView
+            android:id="@+id/task_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="TextView"
+            android:textColor="@color/primaryTextColor"
+            android:textSize="@dimen/list_text_size" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
