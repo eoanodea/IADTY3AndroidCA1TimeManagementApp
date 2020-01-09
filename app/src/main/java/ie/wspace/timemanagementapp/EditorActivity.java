@@ -1,5 +1,6 @@
 package ie.wspace.timemanagementapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -56,6 +57,9 @@ public class EditorActivity extends AppCompatActivity {
         }
 
         initViewModel();
+
+        Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
+        startActivity(intent);
     }
 
     private void initViewModel() {

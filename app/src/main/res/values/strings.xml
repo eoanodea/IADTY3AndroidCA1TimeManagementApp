@@ -97,4 +97,7 @@
     <string name="edit_task">Edit task</string>
     <string name="delete">Delete</string>
     <string name="enter_task_time">Enter task time</string>
+    <string name="action_start">Start</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_pause">Pause</string>
 </resources>

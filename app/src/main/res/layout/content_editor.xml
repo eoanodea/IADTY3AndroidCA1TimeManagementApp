@@ -8,6 +8,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".EditorActivity"
     tools:showIn="@layout/activity_editor">
+
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -24,6 +26,7 @@
             android:inputType="numberDecimal"
             android:textColor="@color/primaryTextColor"
             android:textColorHint="@color/primaryTextColor" />
+
         <EditText
             android:id="@+id/task_text"
             android:layout_width="match_parent"
@@ -34,6 +37,7 @@
             android:inputType="textMultiLine|textCapSentences"
             android:textColor="@color/primaryTextColor"
             android:textColorHint="@color/primaryTextColor" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
