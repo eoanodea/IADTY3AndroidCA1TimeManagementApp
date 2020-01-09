@@ -13,13 +13,13 @@ public class TaskEntity {
     private int id;
     private Date date;
     private String text;
-    private Double time;
+    private int time;
 
     @Ignore
     public TaskEntity() {
     }
 
-    public TaskEntity(int id, Date date, String text, Double time) {
+    public TaskEntity(int id, Date date, String text, int time) {
         this.id = id;
         this.date = date;
         this.text = text;
@@ -27,7 +27,7 @@ public class TaskEntity {
     }
 
     @Ignore
-    public TaskEntity(Date date, String text, Double time) {
+    public TaskEntity(Date date, String text, int time) {
         this.date = date;
         this.text = text;
         this.time = time;
@@ -57,9 +57,11 @@ public class TaskEntity {
         this.text = text;
     }
 
-    public Double getTime() { return time; }
+    public int getTime() {
+        return time;
+    }
 
-    public void setTime(Double time) { this.time = time; }
+    public void setTime(int time) { this.time = time; }
 
     @Override
     public String toString() {

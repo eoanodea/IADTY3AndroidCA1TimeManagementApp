@@ -45,9 +45,8 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TaskEntity task = mTasks.get(position);
         holder.mTextView.setText(task.getText());
-        if (holder.mTimeView != null) {
-            holder.mTimeView.setText(Double.toString(task.getTime()));
-        }
+        holder.mTimeView.setText(Integer.toString(task.getTime()));
+
 
         holder.mFab.setOnClickListener(new View.OnClickListener() {
             @Override

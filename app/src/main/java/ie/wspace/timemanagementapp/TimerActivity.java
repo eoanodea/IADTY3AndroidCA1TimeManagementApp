@@ -30,6 +30,7 @@ public class TimerActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_timer);
+
         mChronometer = findViewById(R.id.task_view_timer);
         mButtonStart = findViewById(R.id.timer_start);
         mButtonPause = findViewById(R.id.timer_pause);
@@ -84,5 +85,7 @@ public class TimerActivity extends AppCompatActivity {
         mButtonPause.setVisibility(View.INVISIBLE);
         mButtonStop.setVisibility(View.INVISIBLE);
         pauseOffset = 0;
+
+        finish();
     }
 }

@@ -16,16 +16,22 @@
         android:layout_height="match_parent"
         >
 
-        <EditText
+        <TextView
             android:id="@+id/task_time"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/text_margin"
-            android:autofillHints="Add time to your task"
-            android:hint="@string/enter_task_time"
-            android:inputType="numberDecimal"
+            android:text="00:00"
+            android:textAlignment="center"
             android:textColor="@color/primaryTextColor"
-            android:textColorHint="@color/primaryTextColor" />
+            android:textColorHint="@color/primaryTextColor"
+            android:textSize="60sp" />
+
+        <Button
+            android:id="@+id/open_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
         <EditText
             android:id="@+id/task_text"

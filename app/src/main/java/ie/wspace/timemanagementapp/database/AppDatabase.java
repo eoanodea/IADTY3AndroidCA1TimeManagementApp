@@ -11,7 +11,7 @@ import androidx.room.TypeConverters;
 @TypeConverters(DateConverter.class)
 
 public abstract class AppDatabase extends RoomDatabase {
-    public static final String DATABASE_NAME = "AppDatabase1.db";
+    public static final String DATABASE_NAME = "AppDatabase2.db";
     private static volatile AppDatabase instance;
     private static final Object LOCK = new Object();
 

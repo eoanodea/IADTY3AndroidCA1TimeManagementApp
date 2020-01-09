@@ -36,7 +36,7 @@ public class EditorViewModel extends AndroidViewModel {
     }
 
     //int in here
-    public void saveTask(String taskText, Double taskTime) {
+    public void saveTask(String taskText, Integer taskTime) {
         TaskEntity task = mLiveTask.getValue();
 
         if(task == null) {

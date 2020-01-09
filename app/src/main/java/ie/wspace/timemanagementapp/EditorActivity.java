@@ -14,9 +14,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,8 +39,11 @@ public class EditorActivity extends AppCompatActivity {
     @Nullable
     @BindView(R.id.task_time)
     TextView mTimeView;
-    //int
 
+    @BindView(R.id.open_timer)
+    Button mButton;
+
+    private int timeValue;
     private EditorViewModel mViewModel;
     private boolean mNewTask, mEditing;
 
@@ -58,8 +64,22 @@ public class EditorActivity extends AppCompatActivity {
 
         initViewModel();
 
-        Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
-        startActivity(intent);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
+
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private String calculateTime(Integer time) {
+        int minutes = (time / 1000) / 60;
+        int seconds = (time / 1000) % 60;
+
+        return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
     }
 
     private void initViewModel() {
@@ -71,9 +91,10 @@ public class EditorActivity extends AppCompatActivity {
             public void onChanged(TaskEntity taskEntity) {
                 if(taskEntity != null && !mEditing) {
                     mTextView.setText(taskEntity.getText());
-                    if (mTimeView != null) {
-                        mTimeView.setText(Double.toString(taskEntity.getTime()));
-                    }
+
+                    timeValue = taskEntity.getTime();
+                    mTimeView.setText(calculateTime(timeValue));
+
                 }
             }
         });
@@ -120,11 +141,11 @@ public class EditorActivity extends AppCompatActivity {
     private void saveAndReturn() {
         //Get task text and task time
         String textViewData = mTextView.getText().toString();
-        String timeViewData = mTimeView.getText().toString();
+        Integer timeViewData = timeValue;
 
         //Check if task time and text are not empty, and if so save
-        if(!TextUtils.isEmpty(textViewData) && !TextUtils.isEmpty(timeViewData)) {
-            mViewModel.saveTask(textViewData, Double.parseDouble(timeViewData));
+        if(!TextUtils.isEmpty(textViewData)) {
+            mViewModel.saveTask(textViewData, timeViewData);
         }
 
         finish();
