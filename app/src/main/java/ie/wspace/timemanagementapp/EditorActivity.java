@@ -43,6 +43,7 @@ public class EditorActivity extends AppCompatActivity {
     @BindView(R.id.open_timer)
     Button mButton;
 
+    private int mTaskId;
     private int timeValue;
     private EditorViewModel mViewModel;
     private boolean mNewTask, mEditing;
@@ -68,7 +69,7 @@ public class EditorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
-
+                intent.putExtra(NOTE_ID_KEY, mTaskId);
                 startActivity(intent);
             }
         });
@@ -107,6 +108,8 @@ public class EditorActivity extends AppCompatActivity {
             setTitle(R.string.edit_task);
             int taskId = extras.getInt(NOTE_ID_KEY);
             mViewModel.loadData(taskId);
+
+            mTaskId = taskId;
         }
     }
 
@@ -121,8 +124,6 @@ public class EditorActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
         if(item.getItemId() == android.R.id.home) {
             saveAndReturn();
             return true;

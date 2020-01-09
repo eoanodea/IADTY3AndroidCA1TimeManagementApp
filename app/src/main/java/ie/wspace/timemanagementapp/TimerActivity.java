@@ -12,8 +12,15 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import java.util.Locale;
+
+import ie.wspace.timemanagementapp.database.TaskEntity;
+import ie.wspace.timemanagementapp.viewmodel.EditorViewModel;
+
+import static ie.wspace.timemanagementapp.utilities.Constants.NOTE_ID_KEY;
 
 public class TimerActivity extends AppCompatActivity {
 
@@ -24,6 +31,10 @@ public class TimerActivity extends AppCompatActivity {
     private Button mButtonStart;
     private Button mButtonPause;
     private Button mButtonStop;
+
+    private int mDefaultValue, mTaskId;
+    private String mTaskText;
+    private EditorViewModel mViewModel;
 
 
     @Override
@@ -54,15 +65,39 @@ public class TimerActivity extends AppCompatActivity {
                 stopTimer();
             }
         });
+
+        initViewModel();
+    }
+
+    private void initViewModel() {
+        mViewModel = ViewModelProviders.of(this)
+                .get(EditorViewModel.class);
+
+        mViewModel.mLiveTask.observe(this, new Observer<TaskEntity>() {
+            @Override
+            public void onChanged(TaskEntity taskEntity) {
+                if(taskEntity != null) {
+                    mDefaultValue = taskEntity.getTime();
+                    mTaskText = taskEntity.getText();
+                    mChronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset - mDefaultValue);
+                }
+            }
+        });
+
+        mTaskId = getIntent().getIntExtra(NOTE_ID_KEY, 0);
+        if(mTaskId != 0) {
+
+            mViewModel.loadData(mTaskId);
+        }
     }
 
     private void startTimer() {
         if(!running) {
-            mChronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            mChronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset - mDefaultValue);
+            mDefaultValue = 0;
             mChronometer.start();
             mButtonStart.setVisibility(View.INVISIBLE);
             mButtonPause.setVisibility(View.VISIBLE);
-            mButtonStop.setVisibility(View.VISIBLE);
             running = true;
         }
     }
@@ -73,19 +108,24 @@ public class TimerActivity extends AppCompatActivity {
             pauseOffset = SystemClock.elapsedRealtime() - mChronometer.getBase();
             mButtonStart.setVisibility(View.VISIBLE);
             mButtonPause.setVisibility(View.INVISIBLE);
-            mButtonStop.setVisibility(View.INVISIBLE);
             running = false;
         }
     }
 
     private void stopTimer() {
+        mDefaultValue = (int) (SystemClock.elapsedRealtime() - mChronometer.getBase());
+
         mChronometer.setBase(SystemClock.elapsedRealtime());
         mChronometer.stop();
         mButtonStart.setVisibility(View.VISIBLE);
         mButtonPause.setVisibility(View.INVISIBLE);
-        mButtonStop.setVisibility(View.INVISIBLE);
         pauseOffset = 0;
 
+        saveAndReturn();
+    }
+
+    private void saveAndReturn() {
+        mViewModel.saveTask(mTaskText, mDefaultValue);
         finish();
     }
 }

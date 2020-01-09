@@ -35,7 +35,6 @@ public class EditorViewModel extends AndroidViewModel {
         });
     }
 
-    //int in here
     public void saveTask(String taskText, Integer taskTime) {
         TaskEntity task = mLiveTask.getValue();
 
@@ -43,7 +42,7 @@ public class EditorViewModel extends AndroidViewModel {
             if(TextUtils.isEmpty(taskText.trim())) {
                 return;
             }
-            // pass in time & alter TaskEntity
+
             task = new TaskEntity(new Date(), taskText.trim(), taskTime);
         } else {
             task.setText(taskText.trim());
