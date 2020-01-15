@@ -70,10 +70,17 @@ public class EditorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), TimerActivity.class);
                 intent.putExtra(NOTE_ID_KEY, mTaskId);
-                startActivity(intent);
+                startActivityForResult(intent, timeValue);
             }
         });
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        timeValue = resultCode;
+        mTimeView.setText(calculateTime(timeValue));
     }
 
     private String calculateTime(Integer time) {

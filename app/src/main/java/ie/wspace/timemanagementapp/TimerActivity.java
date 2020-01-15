@@ -36,6 +36,8 @@ public class TimerActivity extends AppCompatActivity {
     private String mTaskText;
     private EditorViewModel mViewModel;
 
+    private Boolean isNew = false;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,8 +88,9 @@ public class TimerActivity extends AppCompatActivity {
 
         mTaskId = getIntent().getIntExtra(NOTE_ID_KEY, 0);
         if(mTaskId != 0) {
-
             mViewModel.loadData(mTaskId);
+        } else {
+            isNew = true;
         }
     }
 
@@ -125,7 +128,10 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        mViewModel.saveTask(mTaskText, mDefaultValue);
+        if(!isNew) {
+            mViewModel.saveTask(mTaskText, mDefaultValue);
+        }
+        setResult(mDefaultValue);
         finish();
     }
 }

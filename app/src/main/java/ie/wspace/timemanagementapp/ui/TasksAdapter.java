@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,7 +46,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TaskEntity task = mTasks.get(position);
         holder.mTextView.setText(task.getText());
-        holder.mTimeView.setText(Integer.toString(task.getTime()));
+        holder.mTimeView.setText(calculateTime(task.getTime()));
 
 
         holder.mFab.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +57,13 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
                 mContext.startActivity(intent);
             }
         });
+    }
+
+    private String calculateTime(Integer time) {
+        int minutes = (time / 1000) / 60;
+        int seconds = (time / 1000) % 60;
+
+        return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
     }
 
     @Override
