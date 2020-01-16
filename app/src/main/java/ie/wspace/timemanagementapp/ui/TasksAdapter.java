@@ -34,6 +34,10 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         this.mContext = mContext;
     }
 
+    /*
+     * onCreateViewHolder
+     * Called when the RecyclerView needs a new ViewHolder
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +46,10 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
+    /*
+     * onBindViewHolder
+     * Called by RecyclerView to display data at the specified position
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final TaskEntity task = mTasks.get(position);
@@ -59,6 +67,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         });
     }
 
+    /*
+     * calculateTime
+     * Takes time as an integer in milliseconds
+     * Returns a string of a formatted time for the user
+     */
     private String calculateTime(Integer time) {
         int minutes = (time / 1000) / 60;
         int seconds = (time / 1000) % 60;
@@ -66,11 +79,20 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
         return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
     }
 
+    /*
+     * getItemCount
+     * Counts the number of tasks in the Database
+     */
     @Override
     public int getItemCount() {
         return mTasks.size();
     }
 
+    /*
+     * ViewHolder
+     * Gets the task text, time and fab and assigns
+     * values to it
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.task_text)
         TextView mTextView;

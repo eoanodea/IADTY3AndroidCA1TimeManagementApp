@@ -31,6 +31,11 @@ import ie.wspace.timemanagementapp.viewmodel.EditorViewModel;
 import static ie.wspace.timemanagementapp.utilities.Constants.EDITING_KEY;
 import static ie.wspace.timemanagementapp.utilities.Constants.NOTE_ID_KEY;
 
+/*
+ * EditorActivity
+ * Add / Edit a task in the Database
+ */
+
 public class EditorActivity extends AppCompatActivity {
 
     @BindView(R.id.task_text)
@@ -48,6 +53,11 @@ public class EditorActivity extends AppCompatActivity {
     private EditorViewModel mViewModel;
     private boolean mNewTask, mEditing;
 
+    /*
+     * onCreate
+     * Initializes the view, and sets the
+     * on click listeners for save, delete, and start timer
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +75,12 @@ public class EditorActivity extends AppCompatActivity {
 
         initViewModel();
 
+        /*
+         * Listens for a click on the start Timer button
+         * On click, starts the TimerActivity and passes the TaskID
+         * as an intent
+         * startActivityForResult function waits for a response from this activity
+         */
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +92,12 @@ public class EditorActivity extends AppCompatActivity {
 
     }
 
+    /*
+     * onActivityResult
+     * Waits for a response from TimerActivity.
+     * TimerActivity returns the timeValue from the counter in miliseconds
+     * Replaces the old timeValue with the new returned value
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -83,6 +105,11 @@ public class EditorActivity extends AppCompatActivity {
         mTimeView.setText(calculateTime(timeValue));
     }
 
+    /*
+     * calculateTime
+     * Takes time as an integer in milliseconds
+     * Returns a string of a formatted time for the user
+     */
     private String calculateTime(Integer time) {
         int minutes = (time / 1000) / 60;
         int seconds = (time / 1000) % 60;
@@ -90,6 +117,11 @@ public class EditorActivity extends AppCompatActivity {
         return String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
     }
 
+    /*
+     * initViewModel
+     * Initializes the view model
+     * Gets the tasks from the Database
+     */
     private void initViewModel() {
         mViewModel = ViewModelProviders.of(this)
                 .get(EditorViewModel.class);
@@ -120,6 +152,10 @@ public class EditorActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * onCreateOptionsMenu
+     * Creates the options menu
+     */
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
         if(!mNewTask) {
@@ -129,6 +165,11 @@ public class EditorActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /*
+     * onOptionsItemSelected
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home) {
@@ -141,24 +182,34 @@ public class EditorActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+     * onBackPressed
+     * Handles the back button
+     */
     @Override
     public void onBackPressed() {
         saveAndReturn();
     }
 
+    /*
+     * saveAndReturn
+     * Get task text and task time and
+     * saves it to the database
+     * Closes the Activity
+     */
     private void saveAndReturn() {
-        //Get task text and task time
         String textViewData = mTextView.getText().toString();
         Integer timeViewData = timeValue;
 
-        //Check if task time and text are not empty, and if so save
-        if(!TextUtils.isEmpty(textViewData)) {
-            mViewModel.saveTask(textViewData, timeViewData);
-        }
+        mViewModel.saveTask(textViewData, timeViewData);
 
         finish();
     }
 
+    /*
+     * onSaveInstanceState
+     * Saves state information to an instance state bundle
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putBoolean(Constants.EDITING_KEY, true);

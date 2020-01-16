@@ -25,6 +25,12 @@ import ie.wspace.timemanagementapp.database.TaskEntity;
 import ie.wspace.timemanagementapp.ui.TasksAdapter;
 import ie.wspace.timemanagementapp.viewmodel.MainViewModel;
 
+
+/*
+ * MainActivity
+ * Entry point for the application
+ * Displays a list of tasks from the DB
+ */
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.recycler_view)
@@ -34,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private TasksAdapter mAdapter;
     private MainViewModel mViewModel;
 
+    /*
+     * onCreate
+     * Initializes the view, and sets the
+     * on click listener
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,20 +57,29 @@ public class MainActivity extends AppCompatActivity {
         initViewModel();
 
 
-
+        /*
+         * Gets the floating action button by ID
+         * Sets an onClickListener to add a new task
+         * Passes the application context as an intent
+         */
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
                 startActivity(intent);
-
             }
         });
 
 
     }
 
+    /*
+     * initViewModel
+     * Initializes the view model
+     * Gets the tasks from the Database
+     * and displays them in a list
+     */
     private void initViewModel() {
         final Observer<List<TaskEntity>> tasksObserver = new Observer<List<TaskEntity>>() {
             @Override
@@ -81,12 +101,20 @@ public class MainActivity extends AppCompatActivity {
         mViewModel.mTasks.observe(this, tasksObserver);
     }
 
+    /*
+     * initRecyclerView
+     * Initializes the RecyclerView
+     */
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
     }
 
+    /*
+     * onCreateOptionsMenu
+     * Creates the options menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -94,14 +122,15 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /*
+     * onOptionsItemSelected
+     * Handle action bar item clicks here. The action bar will
+     * automatically handle clicks on the Home/Up button
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_add_sample_data) {
             addSampleData();
             return true;
@@ -113,10 +142,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+     * deleteAllTasks
+     * Deletes all tasks from the Database
+     */
     private void deleteAllTasks() {
         mViewModel.deleteAllTasks();
     }
 
+    /*
+     * addSampleData
+     * Adds sample tasks to the DB
+     */
     private void addSampleData() {
         mViewModel.addSampleData();
     }

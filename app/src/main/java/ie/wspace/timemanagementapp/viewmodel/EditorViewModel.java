@@ -2,6 +2,7 @@ package ie.wspace.timemanagementapp.viewmodel;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -25,6 +26,10 @@ public class EditorViewModel extends AndroidViewModel {
         mRepository = AppRepository.getInstance(getApplication());
     }
 
+    /*
+     * loadData
+     * Loads a task by it's task ID
+     */
     public void loadData(final int taskId) {
         executor.execute(new Runnable() {
             @Override
@@ -35,11 +40,16 @@ public class EditorViewModel extends AndroidViewModel {
         });
     }
 
+    /*
+     * saveTask
+     * Checks if the taskText & taskTime are both empty and if so returns
+     * If not, saves the task to the Database
+     */
     public void saveTask(String taskText, Integer taskTime) {
         TaskEntity task = mLiveTask.getValue();
 
         if(task == null) {
-            if(TextUtils.isEmpty(taskText.trim())) {
+            if(TextUtils.isEmpty(taskText.trim()) && taskTime == 0) {
                 return;
             }
 
@@ -51,6 +61,10 @@ public class EditorViewModel extends AndroidViewModel {
         mRepository.insertTask(task);
     }
 
+    /*
+     * deleteTask
+     * Deletes a task from the database
+     */
     public void deleteTask() {
         mRepository.deleteTask(mLiveTask.getValue());
     }

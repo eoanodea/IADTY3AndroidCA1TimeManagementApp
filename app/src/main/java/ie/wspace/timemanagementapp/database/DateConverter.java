@@ -4,6 +4,10 @@ import androidx.room.TypeConverter;
 
 import java.util.Date;
 
+/*
+ * DateConverter
+ * Converts Dates to Longs or Longs to Dates
+ */
 public class DateConverter {
     @TypeConverter
     public static Date toDate(Long timestamp) {

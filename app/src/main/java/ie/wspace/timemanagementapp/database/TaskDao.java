@@ -11,6 +11,10 @@ import java.util.List;
 
 @Dao
 
+/*
+ * TaskDao
+ * SQL queries for manage tasks within the Database
+ */
 public interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

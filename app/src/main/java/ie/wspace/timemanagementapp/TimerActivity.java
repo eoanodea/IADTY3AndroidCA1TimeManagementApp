@@ -22,6 +22,14 @@ import ie.wspace.timemanagementapp.viewmodel.EditorViewModel;
 
 import static ie.wspace.timemanagementapp.utilities.Constants.NOTE_ID_KEY;
 
+/*
+ * TimerActivity
+ * Start, Pause and Stop a timer
+ * Takes in either a intent of Task ID,
+ * and continues from the current value, or if not
+ * assumes it is a new task and starts from 0
+ */
+
 public class TimerActivity extends AppCompatActivity {
 
     private Chronometer mChronometer;
@@ -38,7 +46,11 @@ public class TimerActivity extends AppCompatActivity {
 
     private Boolean isNew = false;
 
-
+    /*
+     * onCreate
+     * Initializes the view, and sets the
+     * on click listeners for start, pause and stop timer
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +83,12 @@ public class TimerActivity extends AppCompatActivity {
         initViewModel();
     }
 
+    /*
+     * initViewModel
+     * Initializes the view model
+     * Gets the tasks from the Database
+     * If the task doesn't exist start from 0
+     */
     private void initViewModel() {
         mViewModel = ViewModelProviders.of(this)
                 .get(EditorViewModel.class);
@@ -94,6 +112,10 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * startTimer
+     * Starts the timer from either 0 or an existing time
+     */
     private void startTimer() {
         if(!running) {
             mChronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset - mDefaultValue);
@@ -105,6 +127,10 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * pauseTimer
+     * Pauses the timer
+     */
     private void pauseTimer() {
         if(running) {
             mChronometer.stop();
@@ -115,6 +141,10 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
+    /*
+     * stopTimer
+     * Stops the timer and closes the runs the saveAndReturn function
+     */
     private void stopTimer() {
         mDefaultValue = (int) (SystemClock.elapsedRealtime() - mChronometer.getBase());
 
@@ -127,6 +157,12 @@ public class TimerActivity extends AppCompatActivity {
         saveAndReturn();
     }
 
+    /*
+     * saveAndReturn
+     * If the task is existing, save to the database
+     * if not, pass the timeValue back to the EditorActivity
+     * And close the activity
+     */
     private void saveAndReturn() {
         if(!isNew) {
             mViewModel.saveTask(mTaskText, mDefaultValue);

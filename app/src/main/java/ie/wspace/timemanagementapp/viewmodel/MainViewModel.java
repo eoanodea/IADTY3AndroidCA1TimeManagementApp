@@ -16,6 +16,10 @@ public class MainViewModel extends AndroidViewModel {
     public LiveData<List<TaskEntity>> mTasks;
     private AppRepository mRepository;
 
+    /*
+     * MainViewModel
+     * Gets tasks from the AppRepository
+     */
     public MainViewModel(@NonNull Application application) {
         super(application);
 
@@ -23,10 +27,18 @@ public class MainViewModel extends AndroidViewModel {
         mTasks = mRepository.mTasks;
     }
 
+    /*
+     * addSampleData
+     * Runs the addSampleData function in the App Repository
+     */
     public void addSampleData() {
         mRepository.addSampleData();
     }
 
+    /*
+     * deleteAllTasks
+     * Runs the deleteAllTasks function in the App Repository
+     */
     public void deleteAllTasks() {
         mRepository.deleteAllTasks();
     }

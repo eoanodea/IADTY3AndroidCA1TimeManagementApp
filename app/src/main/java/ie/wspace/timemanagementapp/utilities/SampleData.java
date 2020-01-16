@@ -8,6 +8,10 @@ import java.util.List;
 
 import ie.wspace.timemanagementapp.database.TaskEntity;
 
+/*
+ * SampleData
+ * Data used for adding 3 sample tasks to the database
+ */
 public class SampleData {
     private static final String SAMPLE_TEXT_1 = "A simple task";
     private static final String SAMPLE_TEXT_2 = "A task with a\nline feed";

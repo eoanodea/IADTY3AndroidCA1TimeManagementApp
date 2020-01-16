@@ -10,6 +10,10 @@ import androidx.room.TypeConverters;
 @Database(entities = {TaskEntity.class}, version = 2)
 @TypeConverters(DateConverter.class)
 
+/*
+ * AppDatabase
+ * Class the represents the Application RoomDatabase
+ */
 public abstract class AppDatabase extends RoomDatabase {
     public static final String DATABASE_NAME = "AppDatabase2.db";
     private static volatile AppDatabase instance;

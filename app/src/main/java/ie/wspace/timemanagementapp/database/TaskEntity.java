@@ -7,7 +7,11 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 @Entity(tableName = "tasks")
-
+/*
+ * TaskEntity
+ * Represents the Task Schema within the Database
+ * Provides getters and setters for each column
+ */
 public class TaskEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;

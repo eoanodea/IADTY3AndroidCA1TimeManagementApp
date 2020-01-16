@@ -10,6 +10,10 @@ import java.util.concurrent.Executors;
 
 import ie.wspace.timemanagementapp.utilities.SampleData;
 
+/*
+ * AppRepository
+ * Manages all the business logic for the tasks in the database
+ */
 public class AppRepository {
     private static AppRepository ourInstance;
 
@@ -17,6 +21,10 @@ public class AppRepository {
     private AppDatabase mDb;
     private Executor executor = Executors.newSingleThreadExecutor();
 
+    /*
+     * getInstance
+     * Gets an AppRepository instance using context as a param
+     */
     public static AppRepository getInstance(Context context) {
         if(ourInstance == null) {
             ourInstance = new AppRepository(context);
@@ -24,11 +32,19 @@ public class AppRepository {
         return ourInstance;
     }
 
+    /*
+     * AppRepository
+     * Gets an instance of the AppDatabase and all Tasks
+     */
     private AppRepository(Context context) {
         mDb = AppDatabase.getInstance(context);
         mTasks = getAllTasks();
     }
 
+    /*
+     * addSampleData
+     * Adds the sample data to the database
+     */
     public void addSampleData() {
         executor.execute(new Runnable() {
             @Override
@@ -38,10 +54,18 @@ public class AppRepository {
         });
     }
 
+    /*
+     * LiveData
+     * Gets all tasks
+     */
     private LiveData<List<TaskEntity>> getAllTasks() {
         return mDb.taskDao().getAll();
     }
 
+    /*
+     * deleteAllTasks
+     * Deletes all tasks from the database
+     */
     public void deleteAllTasks() {
         executor.execute(new Runnable() {
             @Override
@@ -51,10 +75,18 @@ public class AppRepository {
         });
     }
 
+    /*
+     * getTaskById
+     * Gets a task by it's ID
+     */
     public TaskEntity getTaskById(int taskId) {
         return mDb.taskDao().getTaskById(taskId);
     }
 
+    /*
+     * insertTask
+     * Inserts a task into the database
+     */
     public void insertTask(final TaskEntity task) {
         executor.execute(new Runnable() {
             @Override
@@ -64,6 +96,10 @@ public class AppRepository {
         });
     }
 
+    /*
+     * deleteTask
+     * Deletes a task from the database
+     */
     public void deleteTask(final TaskEntity task) {
         executor.execute(new Runnable() {
             @Override
