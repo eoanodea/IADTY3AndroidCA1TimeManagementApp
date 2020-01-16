@@ -9,4 +9,5 @@
     <color name="primaryTextColor">#dad7d1</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="backgroundColor">#222222</color>
+    <color name="cardColor">#494949</color>
 </resources>

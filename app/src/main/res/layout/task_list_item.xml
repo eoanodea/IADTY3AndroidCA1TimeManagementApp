@@ -1,55 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstaintLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="32dp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/list_fab_margin"
-        app:backgroundTint="@color/primaryColor"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_edit" />
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        app:cardBackgroundColor="@color/cardColor"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/fab"
-        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/task_time"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="TextView"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/list_text_size" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/task_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="TextView"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="@dimen/list_text_size" />
-    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="0dp"
+                    android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fab"
+                        android:layout_width="52dp"
+                        android:layout_height="54dp"
+                        android:layout_margin="@dimen/list_fab_margin"
+                        android:layout_weight="1"
+                        app:backgroundTint="@color/primaryColor"
+                        app:fabSize="auto"
+                        app:srcCompat="@drawable/ic_check" />
+
+                    <TextView
+                        android:id="@+id/task_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="24dp"
+                        android:layout_weight="5"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="TextView"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/primaryTextColor"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/task_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="24dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="TextView"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="@dimen/list_text_size" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

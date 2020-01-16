@@ -100,4 +100,5 @@
     <string name="action_start">Start</string>
     <string name="action_stop">Stop</string>
     <string name="action_pause">Pause</string>
+    <string name="start_timer">Start Timer</string>
 </resources>
