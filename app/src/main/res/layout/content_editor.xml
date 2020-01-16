@@ -30,19 +30,28 @@
             android:id="@+id/open_timer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/start_timer" />
+            android:layout_margin="8dp"
+            android:text="@string/start_timer"
+            android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/task_text"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/text_margin"
-            android:autofillHints="Add Notes to your task"
-            android:hint="@string/enter_task"
-            android:inputType="textMultiLine|textCapSentences"
-            android:textColor="@color/primaryTextColor"
-            android:textColorHint="@color/primaryTextColor" />
+            android:layout_margin="16dp"
+            android:textColorHint="@color/primaryColor">
 
+            <EditText
+                android:id="@+id/task_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/text_margin"
+                android:autofillHints="Add Notes to your task"
+                android:hint="@string/enter_task"
+                android:inputType="textMultiLine|textCapSentences"
+                android:textColor="@color/primaryTextColor"
+                android:textColorHint="@color/primaryTextColor" />
+
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
