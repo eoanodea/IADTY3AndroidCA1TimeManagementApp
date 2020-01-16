@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,12 +17,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Optional;
 import ie.wspace.timemanagementapp.database.TaskEntity;
 import ie.wspace.timemanagementapp.utilities.Constants;
 import ie.wspace.timemanagementapp.viewmodel.EditorViewModel;
@@ -52,6 +49,7 @@ public class EditorActivity extends AppCompatActivity {
     private int timeValue;
     private EditorViewModel mViewModel;
     private boolean mNewTask, mEditing;
+    private int mTaskStatus = 0;
 
     /*
      * onCreate
@@ -95,7 +93,7 @@ public class EditorActivity extends AppCompatActivity {
     /*
      * onActivityResult
      * Waits for a response from TimerActivity.
-     * TimerActivity returns the timeValue from the counter in miliseconds
+     * TimerActivity returns the timeValue from the counter in milliseconds
      * Replaces the old timeValue with the new returned value
      */
     @Override
@@ -134,7 +132,6 @@ public class EditorActivity extends AppCompatActivity {
 
                     timeValue = taskEntity.getTime();
                     mTimeView.setText(calculateTime(timeValue));
-
                 }
             }
         });
@@ -177,6 +174,7 @@ public class EditorActivity extends AppCompatActivity {
             return true;
         } else if (item.getItemId() == R.id.action_delete) {
             mViewModel.deleteTask();
+            setResult(mTaskStatus);
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -203,6 +201,14 @@ public class EditorActivity extends AppCompatActivity {
 
         mViewModel.saveTask(textViewData, timeViewData);
 
+        /*
+         * Checks if the task is empty, and updates the status if so
+         */
+        if(TextUtils.isEmpty(textViewData.trim()) && timeViewData == 0) {
+            mTaskStatus = 2;
+        } else mTaskStatus = 1;
+
+        setResult(mTaskStatus);
         finish();
     }
 

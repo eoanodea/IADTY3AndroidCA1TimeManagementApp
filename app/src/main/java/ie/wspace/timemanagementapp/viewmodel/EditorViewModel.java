@@ -1,8 +1,10 @@
 package ie.wspace.timemanagementapp.viewmodel;
 
+import android.app.Activity;
 import android.app.Application;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,6 +14,7 @@ import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import ie.wspace.timemanagementapp.MainActivity;
 import ie.wspace.timemanagementapp.database.AppRepository;
 import ie.wspace.timemanagementapp.database.TaskEntity;
 

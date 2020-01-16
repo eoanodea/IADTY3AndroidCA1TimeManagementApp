@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,11 +68,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
+    }
 
+    /*
+     * onActivityResult
+     * Waits for a response from EditorActivity.
+     * Notifies the user with a message
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
 
+        switch (resultCode) {
+            case 0:
+                notifyUser("Task deleted successfully");
+                break;
+            case 1:
+                notifyUser("Task saved successfully");
+                break;
+            case 2:
+                notifyUser("Empty Task was not saved");
+                break;
+        }
     }
 
     /*
@@ -130,16 +151,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == R.id.action_add_sample_data) {
             addSampleData();
+            notifyUser("Added Sample Tasks");
             return true;
         } else if (id == R.id.action_delete_all) {
             deleteAllTasks();
+            notifyUser("All Tasks Deleted");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /*
+     * notifyUser
+     * Notifies the user with a Toast
+     * Takes in a String message param
+     */
+    public void notifyUser(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     /*

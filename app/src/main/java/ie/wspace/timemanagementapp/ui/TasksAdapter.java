@@ -1,7 +1,9 @@
 package ie.wspace.timemanagementapp.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +64,9 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.ViewHolder> 
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, EditorActivity.class);
                 intent.putExtra(NOTE_ID_KEY, task.getId());
-                mContext.startActivity(intent);
+                if(mContext instanceof Activity) {
+                    ((Activity) mContext).startActivityForResult(intent, 0);
+                }
             }
         });
     }
